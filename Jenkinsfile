@@ -48,7 +48,7 @@ pipeline {
 
         stage('Code Analysis') {
             steps {
-                 bat '../mvnw.cmd spotbugs:spotbugs'
+                 bat 'mvnw.cmd spotbugs:spotbugs'
             }
             post {
                  always {
