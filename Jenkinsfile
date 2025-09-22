@@ -43,3 +43,5 @@ pipeline {
         }
     }
 }
+
+// Webhook trigger test
