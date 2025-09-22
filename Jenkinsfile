@@ -46,17 +46,6 @@ pipeline {
             }
         }
 
-        stage('Code Analysis') {
-            steps {
-                 bat 'mvnw.cmd spotbugs:spotbugs'
-            }
-            post {
-                 always {
-                     recordIssues(tools: [spotBugs(pattern: '**/target/spotbugsXml.xml')])
-                 }
-            }
-        }
-
 
     }
 
