@@ -26,10 +26,12 @@ pipeline {
         }
 
         stage('Package') {
-            steps {
-                bat '../mvnw.cmd package -DskipTests'
-            }
-        }
+                    steps {
+                        dir('myservice') {
+                            bat '../mvnw.cmd package -DskipTests'
+                        }
+                    }
+                }
     }
 
     post {
