@@ -26,12 +26,36 @@ pipeline {
         }
 
         stage('Package') {
-                    steps {
-                        dir('myservice') {
-                            bat '../mvnw.cmd package -DskipTests'
-                        }
-                    }
+            steps {
+                dir('myservice') {
+                    bat '../mvnw.cmd package -DskipTests'
                 }
+            }
+        }
+
+        stage('Unit Tests') {
+            steps {
+                dir('myservice') {
+                    bat '../mvnw.cmd test'
+                }
+            }
+            post {
+                always {
+                    junit 'myservice/target/surefire-reports/*.xml'
+                }
+            }
+        }
+    }
+
+    stage('Code Analysis') {
+        steps {
+            bat '../mvnw.cmd spotbugs:spotbugs'
+        }
+        post {
+            always {
+                recordIssues(tools: [spotBugs(pattern: '**/target/spotbugsXml.xml')])
+            }
+        }
     }
 
     post {
