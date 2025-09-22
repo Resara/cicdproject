@@ -27,7 +27,7 @@ pipeline {
 
         stage('Package') {
             steps {
-                bat 'mvnw.cmd package -DskipTests'
+                bat '../mvnw.cmd package -DskipTests'
             }
         }
     }
