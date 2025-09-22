@@ -14,12 +14,14 @@ pipeline {
 
         stage('Build & Test') {
             steps {
-                bat 'mvnw.cmd clean test'
+                dir('myservice') {
+                   bat '../mvnw.cmd clean test'
+                }
             }
             post {
-                always {
-                    junit '**/target/surefire-reports/*.xml'
-                }
+              always {
+                 junit 'myservice/target/surefire-reports/*.xml'
+              }
             }
         }
 
