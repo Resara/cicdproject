@@ -46,6 +46,23 @@ pipeline {
             }
         }
 
+        stage('Docker Build') {
+                    steps {
+                        dir('myservice') {
+                            bat "docker build -t ${env.DOCKER_HUB_USER}/myservice:latest ."
+                        }
+                    }
+                }
+
+                stage('Docker Push') {
+                    steps {
+                        withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
+                            bat "echo %PASS% | docker login -u %USER% --password-stdin"
+                            bat "docker push ${env.DOCKER_HUB_USER}/myservice:latest"
+                        }
+                    }
+                }
+
 
     }
 
