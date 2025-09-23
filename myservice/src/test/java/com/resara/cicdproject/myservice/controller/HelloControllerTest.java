@@ -10,6 +10,6 @@ public class HelloControllerTest {
     @Test
     void testSayHello() {
         String response = controller.sayHello();
-        assertThat(response).isEqualTo("Hello from CI/CD pipeline project!");
+        assertThat(response).isEqualTo("Hello from CI/CD pipeline project with Docker!");
     }
 }
