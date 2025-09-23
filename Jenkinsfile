@@ -60,12 +60,8 @@ pipeline {
                                                  usernameVariable: 'USER',
                                                  passwordVariable: 'PASS')]) {
 
-                    // Debug: show username and first 3 chars of password (token) to confirm injection
-                    bat 'echo USER=%USER%'
-                    bat 'echo PASS preview: %PASS:~0,3%***'
-
-                    // Login to Docker Hub using the token
-                    bat 'echo %PASS% | docker login -u %USER% --password-stdin'
+                    // Windows-friendly: login directly with -p instead of --password-stdin
+                    bat 'docker login -u %USER% -p %PASS%'
 
                     // Push the image
                     bat "docker push ${env.DOCKER_HUB_USER}/myservice:latest"
