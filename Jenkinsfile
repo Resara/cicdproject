@@ -58,7 +58,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
                     bat "echo %PASS% | docker login -u %USER% --password-stdin"
-                    bat "docker push ${env.DOCKER_HUB_USER}/myservice:latest"
+                    bat "docker push %USER%/myservice:latest"
                 }
             }
         }
