@@ -10,4 +10,5 @@ public class MyserviceApplication {
 		SpringApplication.run(MyserviceApplication.class, args);
 	}
 
+	//pipelineTest
 }
